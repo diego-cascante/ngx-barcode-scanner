@@ -88,13 +88,13 @@ export class BarcodeScannerLivestreamComponent implements OnChanges, OnDestroy {
         ).subscribe(result => {
             const drawingCtx = Quagga.canvas.ctx.overlay;
 
-            Quagga.ImageDebug.drawPath(result.line, {
-                x: 'x',
-                y: 'y',
-            }, drawingCtx, {
-                color: 'red',
-                lineWidth: 3,
-            });
+            // Quagga.ImageDebug.drawPath(result.line, {
+            //     x: 'x',
+            //     y: 'y',
+            // }, drawingCtx, {
+            //     color: 'red',
+            //     lineWidth: 3,
+            // });
 
             this.valueChanges.next(result);
         })
@@ -112,7 +112,7 @@ export class BarcodeScannerLivestreamComponent implements OnChanges, OnDestroy {
 
     private _init(): Promise<void> {
         return new Promise((resolve, reject) => {
-            Quagga.onProcessed((result) => this.onProcessed(result));
+            // Quagga.onProcessed((result) => this.onProcessed(result));
 
             Quagga.onDetected((result) => this.onDetected(result));
 
@@ -172,40 +172,40 @@ export class BarcodeScannerLivestreamComponent implements OnChanges, OnDestroy {
         }
     }
 
-    onProcessed(result: QuaggaJSResultObject): any {
-        const drawingCtx = Quagga.canvas.ctx.overlay;
-        const drawingCanvas = Quagga.canvas.dom.overlay;
+    // onProcessed(result: QuaggaJSResultObject): any {
+        // const drawingCtx = Quagga.canvas.ctx.overlay;
+        // const drawingCanvas = Quagga.canvas.dom.overlay;
 
-        if (result) {
-            if (result.boxes) {
-                drawingCtx.clearRect(0, 0,
-                    parseInt(drawingCanvas.getAttribute('width'), 10),
-                    parseInt(drawingCanvas.getAttribute('height'), 10));
-                result.boxes.filter((box: any) => {
-                    return box !== result.box;
-                }).forEach((box: any) => {
-                    Quagga.ImageDebug.drawPath(box, {
-                        x: 0,
-                        y: 1,
-                    }, drawingCtx, {
-                        color: 'green',
-                        lineWidth: 2,
-                    });
-                });
-            }
+        // if (result) {
+            // if (result.boxes) {
+            //     drawingCtx.clearRect(0, 0,
+            //         parseInt(drawingCanvas.getAttribute('width'), 10),
+            //         parseInt(drawingCanvas.getAttribute('height'), 10));
+            //     result.boxes.filter((box: any) => {
+            //         return box !== result.box;
+            //     }).forEach((box: any) => {
+            //         Quagga.ImageDebug.drawPath(box, {
+            //             x: 0,
+            //             y: 1,
+            //         }, drawingCtx, {
+            //             color: 'green',
+            //             lineWidth: 2,
+            //         });
+            //     });
+            // }
 
-            if (result.box) {
-                Quagga.ImageDebug.drawPath(result.box, {
-                    x: 0,
-                    y: 1,
-                }, drawingCtx, {
-                    color: '#00F',
-                    lineWidth: 2,
-                });
-            }
+            // if (result.box) {
+            //     Quagga.ImageDebug.drawPath(result.box, {
+            //         x: 0,
+            //         y: 1,
+            //     }, drawingCtx, {
+            //         color: '#00F',
+            //         lineWidth: 2,
+            //     });
+            // }
 
-        }
-    }
+        // }
+    // }
 
     onDetected(result: QuaggaJSResultObject): void {
         this._valueChanges.next(result);
